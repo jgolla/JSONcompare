@@ -7,7 +7,7 @@ Install the module with: `npm install JSONcompare`
 
 ```javascript
 var JSONcompare = require('JSONcompare');
-JSONcompare.awesome(); // "awesome"
+JSONcompare.awesome();
 ```
 
 ## Documentation
