@@ -22,7 +22,7 @@ var JSONcompare = require('../lib/JSONcompare.js');
     test.ifError(value)
 */
 
-exports['awesome'] = {
+exports['compare'] = {
   setUp: function(done) {
     // setup here
     done();
@@ -30,7 +30,32 @@ exports['awesome'] = {
   'no args': function(test) {
     test.expect(1);
     // tests here
-    test.equal(JSONcompare.awesome(), 'awesome', 'should be awesome.');
+    test.equal(JSONcompare.compare(), false, 'should be false.');
     test.done();
   },
+  'same file': function(test) {
+    test.expect(1);
+    test.equal(JSONcompare.compare("../test/a.json", "../test/a.json"), true, "should be true.");
+    test.done();
+  },
+  'same file, multiple time': function(test) {
+    test.expect(1);
+    test.equal(JSONcompare.compare("../test/a.json", "../test/a.json", "../test/a.json", "../test/a.json"), true, "should be true.");
+    test.done();
+  },
+  'differnt files, same keys': function(test) {
+    test.expect(1);
+    test.equal(JSONcompare.compare("../test/a.json", "../test/a2.json"), true, "should be true.");
+    test.done();
+  },
+  'differnt keys': function(test) {
+    test.expect(1);
+    test.equal(JSONcompare.compare("../test/a.json", "../test/b.json"), false, "should be false.");
+    test.done();
+  },
+  'differnt keys, different objects': function(test) {
+    test.expect(1);
+    test.equal(JSONcompare.compare("../test/a.json", "../test/c.json"), false, "should be false.");
+    test.done();
+  }
 };
