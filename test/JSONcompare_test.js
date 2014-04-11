@@ -53,7 +53,7 @@ exports['compare'] = {
     test.done();
   },
   'should throw on less than two args': function(test) {
-    //test.expect(1);
+    test.expect(1);
     test.throws(function() { JSONcompare.compare("../test/a.json"); });
     test.done();
   }

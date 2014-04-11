@@ -17,7 +17,15 @@ showOutput - boolean value used to determine if output should be logged to the c
 compare(master, compare1, ..., compareN) - compares the master file with each of the input compare files. Returns true if each compare has all of the same keys as the master.
 
 ## Examples
-_(Coming soon)_
+Running JSONcompare as an app.js
+```javascript
+var JSONcompare = require("./JSONcompare.js");
+
+if (process.argv.length >= 4) {
+    JSONcompare.showOutput = true;
+    JSONcompare.compare.apply(null, process.argv.slice(2));
+}
+```
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
