@@ -24,14 +24,8 @@ var JSONcompare = require('../lib/JSONcompare.js');
 
 exports['compare'] = {
   setUp: function(done) {
-    // setup here
+    JSONcompare.showOutput = false;
     done();
-  },
-  'no args': function(test) {
-    test.expect(1);
-    // tests here
-    test.equal(JSONcompare.compare(), false, 'should be false.');
-    test.done();
   },
   'same file': function(test) {
     test.expect(1);
@@ -56,6 +50,11 @@ exports['compare'] = {
   'differnt keys, different objects': function(test) {
     test.expect(1);
     test.equal(JSONcompare.compare("../test/a.json", "../test/c.json"), false, "should be false.");
+    test.done();
+  },
+  'should throw on less than two args': function(test) {
+    //test.expect(1);
+    test.throws(function() { JSONcompare.compare("../test/a.json"); });
     test.done();
   }
 };
