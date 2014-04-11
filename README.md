@@ -3,8 +3,6 @@
 JSON key comparison tool.
 
 ## Getting Started
-Install the module with: `npm install JSONcompare`
-
 ```javascript
 var JSONcompare = require('JSONcompare');
 var haveSameKeys = JSONcompare.compare(FULL_PATH_TO_JSON_FILE, ANOTHER_FULL_PATH);
@@ -12,10 +10,10 @@ var haveSameKeys = JSONcompare.compare(FULL_PATH_TO_JSON_FILE, ANOTHER_FULL_PATH
 
 ## Documentation
 ### Settings
-_Properties_
+#### Properties
 showOutput - boolean value used to determine if output should be logged to the console.
 
-_Functions_
+#### Functions
 compare(master, compare1, ..., compareN) - compares the master file with each of the input compare files. Returns true if each compare has all of the same keys as the master.
 
 ## Examples
