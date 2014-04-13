@@ -6,13 +6,12 @@ var JSONcompare = require("./lib/JSONcompare.js"),
 if (process.argv.length >= 4) {
     JSONcompare.showOutput = true;
 
-    var args = [];
-    for(var i = 2; i < process.argv.length; i++) {
-        // todo need replative to cwd
-        args.push(path.normalize(process.argv[i]));
-    }
+    var args = [],
+        cwd = process.cwd();
 
-    console.log(args);
+    for(var i = 2; i < process.argv.length; i++) {
+        args.push(path.resolve(cwd, process.argv[i]));
+    }
 
     JSONcompare.compare.apply(null, args);
 }
