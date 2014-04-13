@@ -4,7 +4,7 @@ var JSONcompare = require("./lib/JSONcompare.js"),
     path = require("path");
 
 if (process.argv.length >= 4) {
-    JSONcompare.showOutput = true;
+    JSONcompare.showOutput = false;
 
     var args = [],
         cwd = process.cwd();
@@ -14,4 +14,8 @@ if (process.argv.length >= 4) {
     }
 
     JSONcompare.compare.apply(null, args);
+
+    JSONcompare.outputLog.forEach(function(item) {
+        console.log(item);
+    });
 }
