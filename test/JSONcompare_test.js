@@ -27,11 +27,13 @@ exports['compare'] = {
     done();
   },
   'same file': function(test) {
-
-    // todo: break out this test
-
-    test.expect(4);
+    test.expect(1);
     test.equal(JSONcompare.compare("../test/a.json", "../test/a.json"), true, "should be true.");
+    test.done();
+  },
+  'same file, output verification': function(test) {
+    test.expect(3);
+    JSONcompare.compare("../test/a.json", "../test/a.json");
     test.equal(JSONcompare.outputLog.length, 2, "should be two messages in the log");
     test.equal(JSONcompare.outputLog[0].type, JSONcompare.types.message, "first log should be the message");
     test.equal(JSONcompare.outputLog[1].type, JSONcompare.types.pass, "second log should be the pass");
@@ -48,15 +50,25 @@ exports['compare'] = {
     test.done();
   },
   'differnt keys': function(test) {
-
-    // todo: break out this test
-
-    test.expect(5);
+    test.expect(1);
     test.equal(JSONcompare.compare("../test/a.json", "../test/b.json"), false, "should be false.");
+    test.done();
+  },
+  'differnt keys, output verification': function(test) {
+    test.expect(4);
+    JSONcompare.compare("../test/a.json", "../test/b.json");
     test.equal(JSONcompare.outputLog.length, 3, "should be two messages in the log");
     test.equal(JSONcompare.outputLog[0].type, JSONcompare.types.message, "first log should be the message");
     test.equal(JSONcompare.outputLog[1].type, JSONcompare.types.fail, "second log should be the failure");
     test.equal(JSONcompare.outputLog[2].type, JSONcompare.types.fail, "third log should be the failure");
+    test.done();
+  },
+  'calls to compare should clear the output': function(test) {
+    test.expect(2);
+    JSONcompare.compare("../test/a.json", "../test/b.json");
+    test.equal(JSONcompare.outputLog.length, 3, "should be two messages in the log");
+    JSONcompare.compare("../test/a.json", "../test/a.json");
+    test.equal(JSONcompare.outputLog.length, 2, "should be two messages in the log");
     test.done();
   },
   'differnt keys, different objects': function(test) {
@@ -80,6 +92,19 @@ exports['compare'] = {
       }
     };
     test.equal(JSONcompare.compare(a, a), true, "should be equal");
+    test.done();
+  },
+  'should handle object input, different object': function(test) {
+    test.expect(1);
+    var a = {
+      "a": "aaaa",
+      "b": "bbbb",
+      "c": {
+        "d": "dddd",
+        "e": "eeee"
+      }
+    };
+    test.equal(JSONcompare.compare(a, {b:"b"}), false, "should not be equal");
     test.done();
   }
 };
