@@ -27,6 +27,9 @@ exports['compare'] = {
     done();
   },
   'same file': function(test) {
+
+    // todo: break out this test
+
     test.expect(4);
     test.equal(JSONcompare.compare("../test/a.json", "../test/a.json"), true, "should be true.");
     test.equal(JSONcompare.outputLog.length, 2, "should be two messages in the log");
@@ -45,6 +48,9 @@ exports['compare'] = {
     test.done();
   },
   'differnt keys': function(test) {
+
+    // todo: break out this test
+
     test.expect(5);
     test.equal(JSONcompare.compare("../test/a.json", "../test/b.json"), false, "should be false.");
     test.equal(JSONcompare.outputLog.length, 3, "should be two messages in the log");
@@ -61,6 +67,19 @@ exports['compare'] = {
   'should throw on less than two args': function(test) {
     test.expect(1);
     test.throws(function() { JSONcompare.compare("../test/a.json"); });
+    test.done();
+  },
+  'should handle object input, same object': function(test) {
+    test.expect(1);
+    var a = {
+      "a": "aaaa",
+      "b": "bbbb",
+      "c": {
+        "d": "dddd",
+        "e": "eeee"
+      }
+    };
+    test.equal(JSONcompare.compare(a, a), true, "should be equal");
     test.done();
   }
 };
