@@ -3,6 +3,9 @@
 var JSONcompare = require("./lib/JSONcompare.js"),
     path = require("path");
 
+
+require("colors");
+
 if (process.argv.length >= 4) {
     JSONcompare.showOutput = false;
 
@@ -16,6 +19,12 @@ if (process.argv.length >= 4) {
     JSONcompare.compare.apply(null, args);
 
     JSONcompare.outputLog.forEach(function(item) {
-        console.log(item);
+        if(item.type == "fail") {
+            console.log(item.message.red);
+        } else if(item.type == "pass") {
+            console.log(item.message.green);
+        } else {
+            console.log(item.message);
+        }
     });
 }

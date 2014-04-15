@@ -11,7 +11,14 @@ var haveSameKeys = JSONcompare.compare(FULL_PATH_TO_JSON_FILE, ANOTHER_FULL_PATH
 ## Documentation
 ### Settings
 #### Properties
-showOutput - boolean value used to determine if output should be logged to the console.
+outputLog = Array of the output of each comparison. The objects in the array are in the form { message: "message", type: "type" }. The possible types are:
+```javascript
+compare.types = {
+    "message": "message",
+    "fail": "fail",
+    "pass": "pass"
+};
+```
 
 #### Functions
 compare(master, compare1, ..., compareN) - compares the master file with each of the input compare files. Returns true if each compare has all of the same keys as the master.
@@ -22,8 +29,10 @@ Running JSONcompare as an app.js
 var JSONcompare = require("./JSONcompare.js");
 
 if (process.argv.length >= 4) {
-    JSONcompare.showOutput = true;
     JSONcompare.compare.apply(null, process.argv.slice(2));
+    JSONcompare.outputLog.forEach(function(item) {
+        console.log(item.message);
+    });
 }
 ```
 
